@@ -1,0 +1,13 @@
+### File created: 2013-12-30 15:11:09
+### Project: dependency-manager-test
+### Build: 38
+### SVN: https://svn.dbc.dk/repos/new-dependency-manager/trunk     (rev: 67580)
+
+dbc-python-head
+   Added by: dependency-manager-test
+   Build: 1432
+   SVN/GIT: https://svn.dbc.dk/repos/dbc-python/trunk     (rev: 63555)
+apache-solr-4.5.0
+   Added by: dependency-manager-test
+   Build: 57
+   SVN/GIT: opensearchdependencies-head-metode     (rev: NA)

@@ -1,0 +1,379 @@
+<maven2-moduleset plugin="maven-plugin@1.509.4">
+  <actions/>
+  <description>Addi service (internal) implemented in Java.</description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>30</daysToKeep>
+    <numToKeep>40</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.20">
+      <autoRebuild>false</autoRebuild>
+    </com.sonyericsson.rebuild.RebuildSettings>
+  </properties>
+  <scm class="hudson.scm.SubversionSCM" plugin="subversion@1.53">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>https://svn.dbc.dk/repos/addi-service/trunk</remote>
+        <local>.</local>
+        <depthOption>infinity</depthOption>
+        <ignoreExternalsOption>false</ignoreExternalsOption>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <excludedRegions/>
+    <includedRegions/>
+    <excludedUsers/>
+    <excludedRevprop/>
+    <excludedCommitMessages/>
+    <workspaceUpdater class="hudson.scm.subversion.CheckoutUpdater"/>
+    <ignoreDirPropChanges>false</ignoreDirPropChanges>
+    <filterChangelog>false</filterChangelog>
+  </scm>
+  <assignedNode>guesstimate-head</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>*/3 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <rootModule>
+    <groupId>dk.dbc</groupId>
+    <artifactId>addi-service-reactor</artifactId>
+  </rootModule>
+  <goals>verify pmd:pmd findbugs:findbugs cobertura:cobertura javadoc:aggregate -Dtomcat.port=${TOMCAT_PORT} -Dpostgresql.port=${POSTGRESQL_PORT} -Dfcrepo.port=${FCREPO_PORT} -Dfcrepo.tomcat.port.shutdown=${FCREPO_SHUTDOWN_PORT}</goals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <perModuleEmail>true</perModuleEmail>
+  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <archivingDisabled>false</archivingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <settingConfigId/>
+  <globalSettingConfigId/>
+  <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+  <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+  <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+  <reporters>
+    <hudson.plugins.findbugs.FindBugsReporter plugin="findbugs@4.51">
+      <healthy/>
+      <unHealthy/>
+      <pluginName>[FINDBUGS] </pluginName>
+      <thresholdLimit>low</thresholdLimit>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds plugin="analysis-core@1.54">
+        <unstableTotalAll/>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <unstableNewAll/>
+        <unstableNewHigh/>
+        <unstableNewNormal/>
+        <unstableNewLow/>
+        <failedTotalAll/>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+        <failedNewAll/>
+        <failedNewHigh/>
+        <failedNewNormal/>
+        <failedNewLow/>
+      </thresholds>
+      <dontComputeNew>false</dontComputeNew>
+      <useStableBuildAsReference>false</useStableBuildAsReference>
+      <isRankActivated>false</isRankActivated>
+    </hudson.plugins.findbugs.FindBugsReporter>
+    <hudson.plugins.pmd.PmdReporter plugin="pmd@3.37">
+      <healthy/>
+      <unHealthy/>
+      <pluginName>[PMD] </pluginName>
+      <thresholdLimit>low</thresholdLimit>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds plugin="analysis-core@1.54">
+        <unstableTotalAll/>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <unstableNewAll/>
+        <unstableNewHigh/>
+        <unstableNewNormal/>
+        <unstableNewLow/>
+        <failedTotalAll/>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+        <failedNewAll/>
+        <failedNewHigh/>
+        <failedNewNormal/>
+        <failedNewLow/>
+      </thresholds>
+      <dontComputeNew>false</dontComputeNew>
+      <useStableBuildAsReference>false</useStableBuildAsReference>
+    </hudson.plugins.pmd.PmdReporter>
+    <hudson.plugins.dry.DryReporter plugin="dry@2.38">
+      <healthy/>
+      <unHealthy/>
+      <pluginName>[DRY] </pluginName>
+      <thresholdLimit>low</thresholdLimit>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds plugin="analysis-core@1.54">
+        <unstableTotalAll/>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <unstableNewAll/>
+        <unstableNewHigh/>
+        <unstableNewNormal/>
+        <unstableNewLow/>
+        <failedTotalAll/>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+        <failedNewAll/>
+        <failedNewHigh/>
+        <failedNewNormal/>
+        <failedNewLow/>
+      </thresholds>
+      <dontComputeNew>false</dontComputeNew>
+      <useStableBuildAsReference>false</useStableBuildAsReference>
+      <highThreshold>50</highThreshold>
+      <normalThreshold>25</normalThreshold>
+    </hudson.plugins.dry.DryReporter>
+    <hudson.plugins.tasks.TasksReporter plugin="tasks@4.38">
+      <healthy/>
+      <unHealthy/>
+      <pluginName>[TASKS] </pluginName>
+      <thresholdLimit>low</thresholdLimit>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds plugin="analysis-core@1.54">
+        <unstableTotalAll/>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <unstableNewAll/>
+        <unstableNewHigh/>
+        <unstableNewNormal/>
+        <unstableNewLow/>
+        <failedTotalAll/>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+        <failedNewAll/>
+        <failedNewHigh/>
+        <failedNewNormal/>
+        <failedNewLow/>
+      </thresholds>
+      <dontComputeNew>false</dontComputeNew>
+      <useStableBuildAsReference>false</useStableBuildAsReference>
+      <pattern>**/*.java</pattern>
+      <excludePattern/>
+      <high>todo</high>
+      <normal>fixme,fix</normal>
+      <low>review</low>
+      <ignoreCase>true</ignoreCase>
+    </hudson.plugins.tasks.TasksReporter>
+    <hudson.maven.reporters.MavenMailer>
+      <recipients>os-dev@dbc.dk, rlo@dbc.dk</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>true</sendToIndividuals>
+      <perModuleEmail>true</perModuleEmail>
+    </hudson.maven.reporters.MavenMailer>
+  </reporters>
+  <publishers>
+    <hudson.plugins.warnings.WarningsPublisher plugin="warnings@4.35">
+      <healthy/>
+      <unHealthy/>
+      <thresholdLimit>low</thresholdLimit>
+      <pluginName>[WARNINGS] </pluginName>
+      <defaultEncoding/>
+      <canRunOnFailed>false</canRunOnFailed>
+      <useStableBuildAsReference>false</useStableBuildAsReference>
+      <useDeltaValues>false</useDeltaValues>
+      <thresholds plugin="analysis-core@1.54">
+        <unstableTotalAll/>
+        <unstableTotalHigh/>
+        <unstableTotalNormal/>
+        <unstableTotalLow/>
+        <unstableNewAll/>
+        <unstableNewHigh/>
+        <unstableNewNormal/>
+        <unstableNewLow/>
+        <failedTotalAll/>
+        <failedTotalHigh/>
+        <failedTotalNormal/>
+        <failedTotalLow/>
+        <failedNewAll/>
+        <failedNewHigh/>
+        <failedNewNormal/>
+        <failedNewLow/>
+      </thresholds>
+      <shouldDetectModules>false</shouldDetectModules>
+      <dontComputeNew>false</dontComputeNew>
+      <doNotResolveRelativePaths>false</doNotResolveRelativePaths>
+      <parserConfigurations/>
+      <consoleParsers>
+        <hudson.plugins.warnings.ConsoleParser>
+          <parserName>JavaDoc Tool</parserName>
+        </hudson.plugins.warnings.ConsoleParser>
+        <hudson.plugins.warnings.ConsoleParser>
+          <parserName>DBC JavaScript module loader Warnings</parserName>
+        </hudson.plugins.warnings.ConsoleParser>
+        <hudson.plugins.warnings.ConsoleParser>
+          <parserName>Java Compiler (javac)</parserName>
+        </hudson.plugins.warnings.ConsoleParser>
+        <hudson.plugins.warnings.ConsoleParser>
+          <parserName>DBC JavaScript documentation Warnings</parserName>
+        </hudson.plugins.warnings.ConsoleParser>
+      </consoleParsers>
+    </hudson.plugins.warnings.WarningsPublisher>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>webapp/target/*.war, deploy/target/*.jar, **/target/*.md5</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.plugins.cobertura.CoberturaPublisher plugin="cobertura@1.5">
+      <coberturaReportFile>**/target/site/cobertura/coverage.xml</coberturaReportFile>
+      <onlyStable>true</onlyStable>
+      <healthyTarget>
+        <targets class="enum-map" enum-type="hudson.plugins.cobertura.targets.CoverageMetric">
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>CONDITIONAL</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>70</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>LINE</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>80</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>METHOD</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>80</int>
+          </entry>
+        </targets>
+      </healthyTarget>
+      <unhealthyTarget>
+        <targets class="enum-map" enum-type="hudson.plugins.cobertura.targets.CoverageMetric">
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>CONDITIONAL</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>LINE</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>METHOD</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+        </targets>
+      </unhealthyTarget>
+      <failingTarget>
+        <targets class="enum-map" enum-type="hudson.plugins.cobertura.targets.CoverageMetric">
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>CONDITIONAL</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>LINE</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>METHOD</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+        </targets>
+      </failingTarget>
+      <sourceEncoding>UTF_8</sourceEncoding>
+    </hudson.plugins.cobertura.CoberturaPublisher>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>acceptance-test-addi-fcrepo-VERIFIED, acceptance-test-addi-fcrepo-NEW, acceptance-test-addi-fcrepo-VERIFIED-java7</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+  </publishers>
+  <buildWrappers>
+    <org.jvnet.hudson.plugins.port__allocator.PortAllocator plugin="port-allocator@1.8">
+      <ports>
+        <org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+          <name>TOMCAT_PORT</name>
+        </org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+        <org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+          <name>POSTGRESQL_PORT</name>
+        </org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+        <org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+          <name>FCREPO_PORT</name>
+        </org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+        <org.jvnet.hudson.plugins.port__allocator.TomcatShutdownPortType>
+          <name>FCREPO_SHUTDOWN_PORT</name>
+          <password>SHUTDOWN</password>
+        </org.jvnet.hudson.plugins.port__allocator.TomcatShutdownPortType>
+        <org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+          <name>TOMCAT_PORT_JAVA7</name>
+        </org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+        <org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+          <name>POSTGRESQL_PORT_JAVA7</name>
+        </org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+        <org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+          <name>FCREPO_PORT_JAVA7</name>
+        </org.jvnet.hudson.plugins.port__allocator.DefaultPortType>
+        <org.jvnet.hudson.plugins.port__allocator.TomcatShutdownPortType>
+          <name>FCREPO_SHUTDOWN_PORT_JAVA7</name>
+          <password>SHUTDOWN</password>
+        </org.jvnet.hudson.plugins.port__allocator.TomcatShutdownPortType>
+      </ports>
+    </org.jvnet.hudson.plugins.port__allocator.PortAllocator>
+  </buildWrappers>
+  <prebuilders>
+    <hudson.tasks.Shell>
+      <command>mvn clean</command>
+    </hudson.tasks.Shell>
+  </prebuilders>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>export JAVA_HOME=/usr/dbc/jdk/1.7/
+mvn -Dassembly.skipAssembly verify -Dtomcat.port=${TOMCAT_PORT_JAVA7} -Dpostgresql.port=${POSTGRESQL_PORT_JAVA7} -Dfcrepo.port=${FCREPO_PORT_JAVA7} -Dfcrepo.tomcat.port.shutdown=${FCREPO_SHUTDOWN_PORT_JAVA7}
+echo "Java 7 test completed"</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo "create md5 file for artifact"
+cd webapp/target
+  for f in `ls *.war`
+  do
+    echo "Creating artifact for file '$f'"
+    md5=`md5sum ${f}`
+    echo ${md5% *} &gt; $f.md5
+done
+cd ../..
+cd deploy/target
+  for f in `ls *.jar`
+  do
+    echo "Creating artifact for file '$f'"
+    md5=`md5sum ${f}`
+    echo ${md5% *} &gt; $f.md5
+done
+cd ../..</command>
+    </hudson.tasks.Shell>
+  </postbuilders>
+  <runPostStepsIfResult>
+    <name>SUCCESS</name>
+    <ordinal>0</ordinal>
+    <color>BLUE</color>
+    <completeBuild>true</completeBuild>
+  </runPostStepsIfResult>
+</maven2-moduleset>

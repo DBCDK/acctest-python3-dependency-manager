@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Downloads and verifys third party distributions that the opensearch project depends on&#xd;
+</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>60</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.SubversionSCM">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>https://svn.dbc.dk/repos/pytools/trunk</remote>
+        <local>trunk</local>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <excludedRegions></excludedRegions>
+    <includedRegions></includedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+    <workspaceUpdater class="hudson.scm.subversion.CheckoutUpdater"/>
+  </scm>
+  <assignedNode>guesstimate-head</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>(Default)</jdk>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash -l 
+
+
+###############
+# Helper function
+function die() {
+   echo &quot;ERROR: &quot; &quot;$@&quot;
+   exit 1
+}
+
+# Split based on the MODULE-RELEASE-HOST pattern
+MODULE=${JOB_NAME%-*-*}
+HOST=${JOB_NAME##*-}
+RELEASE=${JOB_NAME/$MODULE-/}
+RELEASE=${RELEASE/-$HOST/}
+
+# Sanity check
+test &quot;x$MODULE-$RELEASE-$HOST&quot; == &quot;x$JOB_NAME&quot; || die &quot;Unable to parse $JOB_NAME into MODULE-RELEASE-HOST&quot;
+
+###############
+# Actually do something
+# Load the right environment, or die trying
+#. /usr/local/dbc_${RELEASE}_tools/bin/dbcenv || die &quot;Unable to load /usr/local/dbc_${RELEASE}_tools/bin/dbcenv&quot;
+
+echo ENVIRONMENT
+
+#cd $WORKSPACE/trunk/python/dbc_python/bin
+cd $WORKSPACE/trunk/src/pytools/bin
+python download3party $WORKSPACE/trunk/ARTIFACTS</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>trunk/ARTIFACTS/**/*</artifacts>
+      <latestOnly>false</latestOnly>
+    </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.Mailer>
+      <recipients>os-dev@dbc.dk</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers/>
+</project>
