@@ -1,10 +1,13 @@
-# acctest-python3-template
+# acctest-python3-dependency-manager
 
-## This is a template package
+Migrated from https://svn.dbc.dk/repos/dependency-manager
+
+
+## Dependency manager
 
 When running stand alone the package-name is taken from the current directory name
 
-ie. `acctest-python3-template` will become `template-dbc` as the python module and `python3-template-dbc` as package name
+ie. `acctest-python3-dependency-manager` will become `dependency-manager-dbc` as the python module and `python3-dependency-manager-dbc` as package name
 
 When building using `Jenkinsfile` the `JOB_NAME` is used to determine package name.
 And the packages are uploaded for `apt-get install`.
@@ -28,8 +31,6 @@ The directory structure is:
 
  * `bin/`
   This is where binary programs resides
- * `man/`
-  If there's man pages are (if any)
  * `src/`
   Where `.py` modules resides
    * test packages (named `tests`) are not included in the debian package

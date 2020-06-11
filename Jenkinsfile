@@ -82,7 +82,7 @@ pipeline {
             junit 'nosetests.xml'
             sh ' chown -R --reference=. . '
         }
-        failure {
+        /*failure {
             script {
                 if ("${env.BRANCH_NAME}" == 'master') {
                     emailext(
@@ -107,7 +107,7 @@ pipeline {
                             attachLog: false)
                 }
             }
-        }
+        }*/
     }
 }
 
